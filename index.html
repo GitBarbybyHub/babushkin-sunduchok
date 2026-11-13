@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>«Бабушкин сундучок» — сценарий дня рождения Кати, 12 лет</title>
+  <meta name="description" content="Домашнее задание: сценарий дня рождения 12-летней Кати. Связка Gemini → GigaChat (Kandinsky) → Suno, 9 участников, квест «Бабушкин сундучок».">
+  <meta name="theme-color" content="#5b2a4e">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="«Бабушкин сундучок» — сценарий дня рождения Кати, 12 лет">
+  <meta property="og:description" content="Готовый сценарий, песня, иллюстрация и разбор работы с нейросетями: Gemini → GigaChat → Suno.">
+  <meta property="og:image" content="assets/img/hero-illustration.png">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235b2a4e'/%3E%3Cpath d='M16 26h32v22H16z' fill='none' stroke='%23fbf4e8' stroke-width='3'/%3E%3Cpath d='M16 32h32M32 26v22M24 26c0-6 8-6 8 0 0-6 8-6 8 0' fill='none' stroke='%23fbf4e8' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9h18v11H3z"></path>
+            <path d="M3 13h18M12 9v11"></path>
+            <path d="M8 9c0-3 4-4 4 0 0-4 4-3 4 0"></path>
+          </svg>
+        </span>
+        <span>Бабушкин сундучок<small>ДЗ · промпт-инжиниринг</small></span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" aria-current="page">Обзор</a></li>
+        <li><a href="scenario.html">Сценарий</a></li>
+        <li><a href="process.html">Ход работы</a></li>
+        <li><a href="index.html#materials">Материалы</a></li>
+        <li class="nav-cta"><a href="scenario.html#song">Песня</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Домашнее задание · базовый уровень</p>
+          <h1>Бабушкин<br><em>сундучок</em></h1>
+          <p class="hero-lead">
+            Сценарий дня рождения Кати, которой исполняется 12. Домашний квест
+            по семейным тайнам — собранный цепочкой нейросетей и проверенный
+            вручную, пункт за пунктом.
+          </p>
+
+          <ul class="hero-meta">
+            <li class="chip"><b>12</b> лет Кате</li>
+            <li class="chip"><b>9</b> участников</li>
+            <li class="chip"><b>3,5</b> часа</li>
+            <li class="chip">квартира бабушки</li>
+          </ul>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="scenario.html">
+              Читать сценарий
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6"></path>
+              </svg>
+            </a>
+            <a class="btn btn-ghost" href="process.html">
+              Как шла работа
+            </a>
+          </div>
+        </div>
+
+        <figure class="hero-figure" data-reveal>
+          <div class="hero-frame">
+            <img src="assets/img/hero-illustration.png" alt="Иллюстрация: девочка-подросток задувает свечи на торте в кругу семьи" data-lightbox data-caption="Итоговая иллюстрация: именинница задувает свечи в кругу семьи. Kandinsky (GigaChat)">
+          </div>
+          <span class="hero-badge"><span aria-hidden="true"></span> Kandinsky · GigaChat</span>
+          <figcaption>Итоговая версия: именинница выглядит на свои 12, вокруг — восемь членов семьи</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ ЦИФРЫ ============ -->
+    <section class="section section-tight">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Работа в цифрах</p>
+          <h2>Что стоит за одним вечером</h2>
+          <p>Кейс урока адаптирован под новые вводные: девочка, 12 лет, квартира бабушки, девять человек за столом.</p>
+        </div>
+
+        <div class="stats">
+          <div class="stat" data-reveal>
+            <span class="stat-value">9</span>
+            <span class="stat-label">участников: 1 + 2 + 2 + 2 + 2 — именно эта арифметика стала главной проверкой работы</span>
+          </div>
+          <div class="stat" data-reveal>
+            <span class="stat-value">5</span>
+            <span class="stat-label">промптов в цепочке Gemini: концепция, сценарий, игры, песня, картинка</span>
+          </div>
+          <div class="stat" data-reveal>
+            <span class="stat-value">6</span>
+            <span class="stat-label">блоков тайминга с 18:00 до 21:30 — от встречи гостей до проводов</span>
+          </div>
+          <div class="stat" data-reveal>
+            <span class="stat-value">4</span>
+            <span class="stat-label">ошибки найдены и исправлены уточняющими промптами — плюс одна опечатка в своём запросе</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ЗАДАЧА ============ -->
+    <section class="section" id="task">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Задача и результат</p>
+          <h2>Что требовалось — что сделано</h2>
+          <p>Каждый шаг можно проверить по исходным документам и скриншотам — они лежат в разделе «Материалы».</p>
+        </div>
+
+        <ol class="check-grid">
+          <li data-reveal>
+            <b>Адаптировать кейс урока</b>
+            Вместо дня рождения 13-летнего мальчика в кафе — 12-летняя Катя дома у бабушки, девять участников.
+          </li>
+          <li data-reveal>
+            <b>Собрать цепочку промптов</b>
+            Gemini выдал пять последовательных промптов, каждый прогнан в GigaChat — от концепции до открытки.
+          </li>
+          <li data-reveal>
+            <b>Проверить ответы, а не копировать</b>
+            Сверка с вводными выявила арифметику, повторы игр, несоответствие картинки и дыру в тайминге.
+          </li>
+          <li data-reveal>
+            <b>Исправить уточняющими промптами</b>
+            Точечные запросы переписали песню на «девять нот», оставили две уникальные игры и перегенерировали иллюстрацию.
+          </li>
+          <li data-reveal>
+            <b>Сделать песню в Suno</b>
+            Два трека: по исходному тексту и по исправленному — «Катя ДР» и «Песня для Кати 2.0».
+          </li>
+          <li data-reveal>
+            <b>Собрать итоговый документ</b>
+            Сценарий оформлен в «Умном редакторе» и приложен в DOCX и PDF вместе с отчётом о ходе работы.
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ МАРШРУТ ============ -->
+    <section class="section" id="route">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Тайминг</p>
+          <h2>Маршрут праздника</h2>
+          <p>Шесть блоков на 3,5 часа. Блок чаепития добавлен после проверки: без него сценарий заканчивался в 20:40.</p>
+        </div>
+
+        <div class="route">
+          <article class="route-item" data-reveal>
+            <span class="route-dur">20 мин</span>
+            <span class="route-time">18:00–18:20</span>
+            <h3>Встреча и разминка</h3>
+            <p>Билетики с номерами, бумажные фигурки на стульях, «Семейная цепочка» с клубком.</p>
+          </article>
+          <article class="route-item" data-reveal>
+            <span class="route-dur">40 мин</span>
+            <span class="route-time">18:20–19:00</span>
+            <h3>Застолье с интерактивами</h3>
+            <p>«Бабушкин микрофон», «Что у меня в тарелке?», «Продолжи пословицу».</p>
+          </article>
+          <article class="route-item" data-reveal>
+            <span class="route-dur">50 мин</span>
+            <span class="route-time">19:05–19:55</span>
+            <h3>Квест «Бабушкин сундучок»</h3>
+            <p>Пять станций от членов семьи, пять ключей с цифрами и код к сундучку.</p>
+          </article>
+          <article class="route-item" data-reveal>
+            <span class="route-dur">25 мин</span>
+            <span class="route-time">19:55–20:20</span>
+            <h3>Финальный сюрприз</h3>
+            <p>Сертификаты семьи, письмо бабушки на диктофоне, фотоальбом, «Свеча желаний».</p>
+          </article>
+          <article class="route-item" data-reveal>
+            <span class="route-dur">20 мин</span>
+            <span class="route-time">20:20–20:40</span>
+            <h3>Подарок и торт</h3>
+            <p>«Набор 12-летней»: снимок, билет в кино, «12 записок», копилка «На чердак».</p>
+          </article>
+          <article class="route-item" data-reveal>
+            <span class="route-dur">50 мин</span>
+            <span class="route-time">20:40–21:30</span>
+            <h3>Чаепитие, песня и проводы</h3>
+            <p>Бабушкин пирог, «Песня для Кати» из Suno, общее живое фото.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ СТАНЦИИ ============ -->
+    <section class="section" id="stations">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Квест</p>
+          <h2>Пять станций — пять ключей</h2>
+          <p>Сундучок открывается, когда семья проходит все станции. Каждую ведёт свой «хранитель» — старших не заставляют участвовать, им дают роль.</p>
+        </div>
+
+        <div class="stations">
+          <article class="station" data-reveal>
+            <span class="station-key" aria-label="Ключ 1">1</span>
+            <h3>Голос из кухни</h3>
+            <p>Три фразы из детства бабушки. Дети угадывают год — 1963.</p>
+            <span class="station-host">Бабушка</span>
+          </article>
+          <article class="station" data-reveal>
+            <span class="station-key" aria-label="Ключ 2">2</span>
+            <h3>Секретный ящичек</h3>
+            <p>В мешке четыре предмета. На ощупь найти старый компас с флота.</p>
+            <span class="station-host">Дедушка</span>
+          </article>
+          <article class="station" data-reveal>
+            <span class="station-key" aria-label="Ключ 3">3</span>
+            <h3>Семейный рецепт</h3>
+            <p>Отмерить ровно 300 г муки без весов, пока мама рассказывает про пирог 1998 года.</p>
+            <span class="station-host">Мама и тётя</span>
+          </article>
+          <article class="station" data-reveal>
+            <span class="station-key" aria-label="Ключ 4">4</span>
+            <h3>Зеркальная телеграмма</h3>
+            <p>Прочитать задом наперёд текст через зеркальце: «19 августа мы ходили в лес за грибами».</p>
+            <span class="station-host">Дядя</span>
+          </article>
+          <article class="station" data-reveal>
+            <span class="station-key" aria-label="Ключ 5">5</span>
+            <h3>Карта сокровищ</h3>
+            <p>План бабушкиной квартиры с крестиками: подоконник, фикус, холодильник.</p>
+            <span class="station-host">Катя и младшие</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ПЕСНЯ ============ -->
+    <section class="section" id="song">
+      <div class="container">
+        <div class="song-panel" data-reveal>
+          <div>
+            <p class="eyebrow">Песня для Кати</p>
+            <h2>Девять нот семьи</h2>
+            <ul class="song-tags">
+              <li>Upbeat Pop Rap</li>
+              <li>Family Choir</li>
+              <li>120–125 BPM</li>
+            </ul>
+            <p class="song-verse">
+              <span>Катя-Катя — девять нот семьи,</span>
+              <span>Ты — та самая, кого берегли.</span>
+              <span>Папин смех, мамин завиток,</span>
+              <span>Дед с бабулей — счастья уголёк.</span>
+            </p>
+            <p class="song-note">
+              Текст — GigaChat, музыка — Suno. В первом треке было «восемь нот»:
+              модель повторила ошибку из промпта. После уточняющего запроса
+              появилась версия «2.0» — с правильной цифрой и двумя уникальными играми.
+            </p>
+          </div>
+          <div class="song-actions">
+            <a class="btn btn-primary" href="scenario.html#song">Полный текст песни</a>
+            <a class="btn btn-ghost" href="process.html#stage-3">Как исправляли</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ МАТЕРИАЛЫ ============ -->
+    <section class="section" id="materials">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Материалы</p>
+          <h2>Всё, что можно открыть и проверить</h2>
+          <p>Итоговый сценарий, отчёт с запросами и скриншотами, сопроводительное сообщение. Файлы — оригиналы.</p>
+        </div>
+
+        <div class="materials">
+          <a class="file-card" href="assets/files/scenario.pdf" download data-reveal>
+            <span class="file-icon">PDF</span>
+            <span>
+              <strong>Сценарий дня рождения Кати — итог</strong>
+              <span>Для чтения · 240 КБ</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 4v12M7 11l5 5 5-5M5 20h14"></path>
+            </svg>
+          </a>
+          <a class="file-card" href="assets/files/scenario.docx" download data-reveal>
+            <span class="file-icon">DOCX</span>
+            <span>
+              <strong>Сценарий — редактируемая версия</strong>
+              <span>Из «Умного редактора» · 1,1 МБ</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 4v12M7 11l5 5 5-5M5 20h14"></path>
+            </svg>
+          </a>
+          <a class="file-card" href="assets/files/worklog.pdf" download data-reveal>
+            <span class="file-icon">PDF</span>
+            <span>
+              <strong>Приложение. Ход работы</strong>
+              <span>Все запросы, ответы, экраны · 1,5 МБ</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 4v12M7 11l5 5 5-5M5 20h14"></path>
+            </svg>
+          </a>
+          <a class="file-card" href="assets/files/worklog.docx" download data-reveal>
+            <span class="file-icon">DOCX</span>
+            <span>
+              <strong>Ход работы — редактируемая версия</strong>
+              <span>Полный отчёт · 4,4 МБ</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 4v12M7 11l5 5 5-5M5 20h14"></path>
+            </svg>
+          </a>
+          <a class="file-card" href="assets/files/cover-letter.txt" download data-reveal>
+            <span class="file-icon">TXT</span>
+            <span>
+              <strong>Сопроводительное сообщение</strong>
+              <span>Коротко о задаче и правках · 2 КБ</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 4v12M7 11l5 5 5-5M5 20h14"></path>
+            </svg>
+          </a>
+          <a class="file-card" href="process.html#gallery" data-reveal>
+            <span class="file-icon">PNG</span>
+            <span>
+              <strong>Скриншоты по этапам</strong>
+              <span>Gemini, GigaChat, Suno, картинки · 10 экранов</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9h18v11H3z"></path>
+                <path d="M3 13h18M12 9v11"></path>
+                <path d="M8 9c0-3 4-4 4 0 0-4 4-3 4 0"></path>
+              </svg>
+            </span>
+            <span>Бабушкин сундучок</span>
+          </a>
+          <p>Домашнее задание по промпт-инжинирингу. Сценарий дня рождения, песня и иллюстрация собраны связкой Gemini → GigaChat → Suno и проверены вручную.</p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Навигация в подвале">
+          <a href="scenario.html">Сценарий</a>
+          <a href="scenario.html#song">Песня</a>
+          <a href="process.html">Ход работы</a>
+          <a href="process.html#errors">Ошибки и правки</a>
+          <a href="process.html#gallery">Скриншоты</a>
+          <a href="index.html#materials">Файлы</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <span>Автор работы — Варвара Толмачёва · <span data-year>2026</span></span>
+        <span>Иллюстрации: Kandinsky (GigaChat)</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр изображения">
+    <button class="lightbox-close" type="button" aria-label="Закрыть">&times;</button>
+    <figure>
+      <img alt="">
+      <figcaption></figcaption>
+    </figure>
+  </div>
+
+  <button class="to-top" type="button" aria-label="Наверх">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 19V5M6 11l6-6 6 6"></path>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>

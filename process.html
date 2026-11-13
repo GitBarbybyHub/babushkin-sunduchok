@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ход работы — «Бабушкин сундучок»</title>
+  <meta name="description" content="Как собирался сценарий: цепочка промптов Gemini → GigaChat → Suno, найденные ошибки, уточняющие запросы и скриншоты по этапам.">
+  <meta name="theme-color" content="#5b2a4e">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235b2a4e'/%3E%3Cpath d='M16 26h32v22H16z' fill='none' stroke='%23fbf4e8' stroke-width='3'/%3E%3Cpath d='M16 32h32M32 26v22M24 26c0-6 8-6 8 0 0-6 8-6 8 0' fill='none' stroke='%23fbf4e8' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9h18v11H3z"></path>
+            <path d="M3 13h18M12 9v11"></path>
+            <path d="M8 9c0-3 4-4 4 0 0-4 4-3 4 0"></path>
+          </svg>
+        </span>
+        <span>Бабушкин сундучок<small>ДЗ · промпт-инжиниринг</small></span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+      </button>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Обзор</a></li>
+        <li><a href="scenario.html">Сценарий</a></li>
+        <li><a href="process.html" aria-current="page">Ход работы</a></li>
+        <li><a href="index.html#materials">Материалы</a></li>
+        <li class="nav-cta"><a href="process.html#gallery">Скриншоты</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Приложение · ход работы</p>
+        <h1>Как собирался сценарий</h1>
+        <p class="lead">
+          Четыре этапа, девять шагов и одна привычка: сверять каждый ответ
+          с вводными, а не копировать его дальше по цепочке. Ниже — запросы,
+          найденные ошибки и скриншоты, по которым это можно проверить.
+        </p>
+        <ul class="hero-meta">
+          <li class="chip"><b>4</b> этапа</li>
+          <li class="chip"><b>9</b> шагов</li>
+          <li class="chip"><b>4</b> исправления</li>
+          <li class="chip">2 версии картинки</li>
+          <li class="chip">2 трека Suno</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container page-grid">
+      <article class="prose">
+        <!-- ЭТАП 1 -->
+        <section class="stage" id="stage-1">
+          <span class="stage-marker" aria-hidden="true">1</span>
+          <p class="stage-kicker">Этап 1 · постановка задачи</p>
+          <h2>Gemini собирает цепочку промптов</h2>
+
+          <div class="stage-body">
+            <p>
+              Задача: получить у Gemini набор промптов, по которым GigaChat
+              соберёт полноценный сценарий праздника, песню и картинки.
+              В запрос сразу заложены вводные — 12 лет, дом бабушки, состав семьи.
+            </p>
+
+            <details class="prompt-card">
+              <summary>Запрос к Gemini — полный текст</summary>
+              <div class="prompt-body">
+                <span class="prompt-label">Запрос</span>
+                <div class="copy-wrap">
+                  <pre class="prompt-text" id="prompt-gemini">Дай мне набор промптов, чтобы, используя их один за другим, я могла собрать полноценный сценарий праздника на день рождения сына. Я буду делать это в нейросети GigaChat. Составь промпты, которые GigaChat максимально точно сможет воплотить. Добавь промпты, по которым можно будет создать песню и картинки для игр на празднике. Дочке исполнится 12 лет. На празднике будут: ее двоюродные младшие сестренка и братик с родителями (дядя с женой), бабушка и дедушка, мама и папа. Праздник будет проходить дома у бабули.</pre>
+                  <button class="copy-btn" type="button" data-copy="#prompt-gemini">Копировать</button>
+                </div>
+                <p style="margin-top: 14px; font-size: 14px; color: var(--muted);">
+                  В запросе осталось «день рождения сына» из кейса урока.
+                  Опечатка не повлияла на результат: дальше указано «дочке
+                  исполнится 12 лет», и Gemini составил все промпты для девочки.
+                  Запрос оставлен без изменений как подлинный.
+                </p>
+              </div>
+            </details>
+
+            <p style="margin-top: 22px;"><strong>Что вернул Gemini:</strong> пять последовательных шагов.</p>
+            <ul>
+              <li><strong>Концепция</strong> — три темы праздника для разновозрастной компании.</li>
+              <li><strong>Сценарий</strong> — подробный тайминг на 3–4 часа с застольем и играми.</li>
+              <li><strong>Игры</strong> — четыре активности без сложного реквизита.</li>
+              <li><strong>Песня</strong> — текст с музыкальными тегами для Suno.</li>
+              <li><strong>Картинка</strong> — промпт для открытки через Kandinsky.</li>
+            </ul>
+
+            <figure class="figure">
+              <img src="assets/img/step1-gemini.png" alt="Скриншот диалога с Gemini: запрос и ответ с цепочкой из пяти промптов" data-lightbox data-caption="Скриншот 1. Запрос и ответ Gemini — цепочка из пяти промптов">
+              <figcaption><b>Скриншот 1</b> Запрос и ответ Gemini — цепочка из пяти промптов.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- ЭТАП 2 -->
+        <section class="stage" id="stage-2">
+          <span class="stage-marker" aria-hidden="true">2</span>
+          <p class="stage-kicker">Этап 2 · генерация</p>
+          <h2>GigaChat: пять запросов — пять ответов</h2>
+
+          <div class="stage-body">
+            <p>
+              Промпты прогнаны по очереди. Каждый следующий опирается
+              на предыдущий ответ — поэтому ошибка в первом шаге могла
+              разойтись по всему сценарию.
+            </p>
+
+            <details class="prompt-card">
+              <summary>Запрос 1. Концепция</summary>
+              <div class="prompt-body">
+                <span class="prompt-label">Запрос</span>
+                <div class="copy-wrap">
+                  <pre class="prompt-text" id="prompt-1">Ты профессиональный сценарист семейных праздников. Помоги разработать концепцию дня рождения для девочки, которой исполняется 12 лет. Праздник пройдет дома у бабушки в уютном семейном кругу (всего 8 человек: именинница, ее младшие двоюродные братик и сестричка, дядя с тетей, бабушка с дедушкой, мама и папа). Предложи 3 варианта теплой и душевной темы праздника (например, в стиле уютного кинофестиваля, домашнего квеста или теплой ламповой вечеринки), которая будет интересна и имениннице-подростку, и младшим детям, и старшему поколению.</pre>
+                  <button class="copy-btn" type="button" data-copy="#prompt-1">Копировать</button>
+                </div>
+                <span class="prompt-label">Результат</span>
+                <p>
+                  Три темы: «Вечер кино и семейных историй», «Бабушкин сундучок»
+                  и «Ламповые посиделки при свечах». Выбран «Бабушкин сундучок» —
+                  домашний квест по семейным тайнам.
+                </p>
+              </div>
+            </details>
+
+            <figure class="figure">
+              <img src="assets/img/step2-concepts.png" alt="Скриншот ответа GigaChat с тремя концепциями праздника" data-lightbox data-caption="Скриншот 2. GigaChat — три концепции праздника">
+              <figcaption><b>Скриншот 2</b> Ответ GigaChat с тремя концепциями праздника.</figcaption>
+            </figure>
+
+            <details class="prompt-card">
+              <summary>Запрос 2. Сценарий и тайминг</summary>
+              <div class="prompt-body">
+                <span class="prompt-label">Запрос</span>
+                <div class="copy-wrap">
+                  <pre class="prompt-text" id="prompt-2">Отлично, берем за основу тему «Бабушкин сундучок». Теперь напиши подробный сценарий домашнего дня рождения для 12-летней девочки. Участники: именинница, младшие брат и сестра, дядя, тетя, бабушка, дедушка, мама, папа. Место действия — квартира бабушки. Сценарий должен включать: Встречу гостей и легкую разминку. Застольную часть с душевными интерактивами, которые не дадут заскучать ни детям, ни взрослым. Блок активных или интеллектуальных семейных игр, адаптированных для домашних условий. Финальный сюрприз и вручение подарка. Распиши тайминг мероприятия примерно на 3–4 часа.</pre>
+                  <button class="copy-btn" type="button" data-copy="#prompt-2">Копировать</button>
+                </div>
+                <span class="prompt-label">Результат</span>
+                <p>
+                  Сценарий 18:00–21:30: встреча, застолье с тремя интерактивами,
+                  квест из пяти станций, сюрприз, подарок и список реквизита.
+                  Блоки заканчивались в 20:40 — это выяснится на ревизии.
+                </p>
+              </div>
+            </details>
+
+            <figure class="figure">
+              <img src="assets/img/step3-scenario.png" alt="Скриншот ответа GigaChat со сценарием «Бабушкин сундучок»" data-lightbox data-caption="Скриншот 3. GigaChat — сценарий «Бабушкин сундучок» с таймингом">
+              <figcaption><b>Скриншот 3</b> Сценарий «Бабушкин сундучок» с таймингом.</figcaption>
+            </figure>
+
+            <details class="prompt-card">
+              <summary>Запрос 3. Игры для всех поколений</summary>
+              <div class="prompt-body">
+                <span class="prompt-label">Запрос</span>
+                <div class="copy-wrap">
+                  <pre class="prompt-text" id="prompt-3">Предложи 4 интерактивные игры или семейных конкурса для компании из 8 человек (именинница 12 лет, младшие дети, родители, бабушка и дедушка), которые можно провести прямо за столом или в небольшой гостиной без сложного реквизита. Игры должны быть добрыми, веселыми, сближающими поколения, чтобы и младшим было весело, и бабушка с дедушкой с удовольствием поучаствовали или посмеялись.</pre>
+                  <button class="copy-btn" type="button" data-copy="#prompt-3">Копировать</button>
+                </div>
+                <span class="prompt-label">Результат</span>
+                <p>
+                  «Бабушкин телефон», «Узнай по запаху», «Семейная хроника»,
+                  «Ожившая фотокарточка». Две последние позже уйдут:
+                  одна дублирует застольный интерактив, другая требует
+                  выйти из-за стола.
+                </p>
+              </div>
+            </details>
+
+            <figure class="figure">
+              <img src="assets/img/step4-games.png" alt="Скриншот ответа GigaChat с четырьмя семейными играми" data-lightbox data-caption="Скриншот 4. GigaChat — четыре семейные игры">
+              <figcaption><b>Скриншот 4</b> Четыре игры для разновозрастной компании.</figcaption>
+            </figure>
+
+            <details class="prompt-card">
+              <summary>Запрос 4. Песня для Suno</summary>
+              <div class="prompt-body">
+                <span class="prompt-label">Запрос</span>
+                <div class="copy-wrap">
+                  <pre class="prompt-text" id="prompt-4">Напиши душевную, ритмичную и веселую песню-поздравление для 12-летней девочки по имени Катя. В тексте обязательно упомяни: что она умница и уже совсем взрослая; ее маму и папу, которые ее очень сильно любят и гордятся ей; бабушек и дедушку, которые всегда ждут ее в гости; ее младших двоюродных брата Колю и сестру Ксюшу; всю большую и дружную семью, которая собралась вместе. Текст должен состоять из куплетов и запоминающегося заводного припева, чтобы песня легко легла на музыку. Напиши в начале каждого блока музыкальный стиль (например, Rap, RnB, DnB, чтобы было удобно использовать в музыкальной нейросети Suno).</pre>
+                  <button class="copy-btn" type="button" data-copy="#prompt-4">Копировать</button>
+                </div>
+                <span class="prompt-label">Результат</span>
+                <p>
+                  Три куплета, припев, бридж и аутро с тегами RnB / Pop Rap / DnB.
+                  В припеве — «восемь нот семьи»: цифра пришла из промпта.
+                </p>
+              </div>
+            </details>
+
+            <figure class="figure">
+              <img src="assets/img/step5-song.png" alt="Скриншот ответа GigaChat с текстом песни и музыкальными тегами" data-lightbox data-caption="Скриншот 5. GigaChat — текст песни для Suno">
+              <figcaption><b>Скриншот 5</b> Текст песни с разметкой стилей для Suno.</figcaption>
+            </figure>
+
+            <details class="prompt-card">
+              <summary>Запрос 5. Открытка</summary>
+              <div class="prompt-body">
+                <span class="prompt-label">Запрос</span>
+                <div class="copy-wrap">
+                  <pre class="prompt-text" id="prompt-5">Сгенерируй яркую, добрую и уютную иллюстрацию в стиле современной детской открытки. На картинке изображены милые домашние элементы праздника: красивый праздничный торт со свечами, разноцветные воздушные шары, падающие конфетти и силуэты счастливой семьи. Стиль минималистичный, светлый фон, пастельные и теплые радостные оттенки. Без лишнего текста.</pre>
+                  <button class="copy-btn" type="button" data-copy="#prompt-5">Копировать</button>
+                </div>
+                <span class="prompt-label">Результат</span>
+                <p>
+                  Пастельная открытка 1024×1024 с тортом, шарами и силуэтами семьи.
+                  На ревизии выяснится: фигур семь, именинница не выделена.
+                </p>
+              </div>
+            </details>
+
+            <div class="figure-pair">
+              <figure class="figure">
+                <img src="assets/img/card-v1.png" alt="Первая открытка от Kandinsky: торт, шары и силуэты семьи" data-lightbox data-caption="Первая открытка от Kandinsky. Семь фигур, нет именинницы-подростка — отправлена на перегенерацию">
+                <figcaption><b>Картинка 1</b> Первая открытка: семь фигур, нет именинницы — отправлена на перегенерацию.</figcaption>
+              </figure>
+              <figure class="figure">
+                <img src="assets/img/step6-card.png" alt="Скриншот GigaChat с запросом и сгенерированной открыткой" data-lightbox data-caption="Скриншот 6. GigaChat — запрос и сгенерированная открытка">
+                <figcaption><b>Скриншот 6</b> Запрос и первая открытка в диалоге GigaChat.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <!-- ЭТАП 3 -->
+        <section class="stage" id="stage-3">
+          <span class="stage-marker" aria-hidden="true">3</span>
+          <p class="stage-kicker">Этап 3 · ревизия</p>
+          <h2>Проверка вводных и уточняющие промпты</h2>
+
+          <div class="stage-body">
+            <p>
+              Каждый ответ сверялся с вводными: состав семьи, возраст,
+              механики игр, длительность блоков. Четыре ошибки исправлены,
+              одна опечатка в собственном запросе зафиксирована честно.
+            </p>
+
+            <div id="errors" class="errors">
+              <article class="error-card" data-reveal>
+                <div class="error-head">
+                  <span class="error-num" aria-hidden="true">1</span>
+                  <h3>Арифметика: 8 вместо 9</h3>
+                  <span class="error-status">Исправлено</span>
+                </div>
+                <div class="error-body">
+                  <div>
+                    <h4>Как обнаружила</h4>
+                    <p>В промпте шага 1 Gemini написал «всего 8 человек» и при этом перечислил всех девятерых. Ошибка ушла в GigaChat: «восемь нот семьи», «восемь за столом». Пересчитала состав вручную: 1 + 2 + 2 + 2 + 2 = 9.</p>
+                  </div>
+                  <div>
+                    <h4>Исправление и результат</h4>
+                    <p>Уточняющий промпт с прямым указанием на ошибку. GigaChat переписал песню («девять нот семьи», «девять за столом») и адаптировал игры под девять игроков.</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="error-card" data-reveal>
+                <div class="error-head">
+                  <span class="error-num" aria-hidden="true">2</span>
+                  <h3>Повторы игр</h3>
+                  <span class="error-status">Исправлено</span>
+                </div>
+                <div class="error-body">
+                  <div>
+                    <h4>Как обнаружила</h4>
+                    <p>«Узнай по запаху» из запроса 3 повторяет «Что у меня в тарелке?» из запроса 2 — угадывание с завязанными глазами. «Ожившая фотокарточка» требует выйти из-за стола. Сравнила механики.</p>
+                  </div>
+                  <div>
+                    <h4>Исправление и результат</h4>
+                    <p>Попросила оставить две уникальные застольные игры. Остались «Бабушкин телефон» и «Семейная хроника», адаптированные под 9 человек. GigaChat сам назвал, какие игры исключены и почему.</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="error-card" data-reveal>
+                <div class="error-head">
+                  <span class="error-num" aria-hidden="true">3</span>
+                  <h3>Картинка не соответствует вводным</h3>
+                  <span class="error-status soft">Исправлено частично</span>
+                </div>
+                <div class="error-body">
+                  <div>
+                    <h4>Как обнаружила</h4>
+                    <p>На первой открытке семь фигур, нет выделенной именинницы, девочка выглядит младше 12 лет. Сверила изображение с составом семьи и возрастом.</p>
+                  </div>
+                  <div>
+                    <h4>Исправление и результат</h4>
+                    <p>Отдельный промпт: «строго 12 лет, не малыш!», явный перечень восьми членов семьи, сцена задувания свечей. Результат: именинница-подросток в центре кадра. Ограничение: Kandinsky не держит точное число людей — на второй картинке больше двух младших детей. Для открытки допустимо.</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="error-card" data-reveal>
+                <div class="error-head">
+                  <span class="error-num" aria-hidden="true">4</span>
+                  <h3>Тайминг не сходился</h3>
+                  <span class="error-status">Исправлено</span>
+                </div>
+                <div class="error-body">
+                  <div>
+                    <h4>Как обнаружила</h4>
+                    <p>Заявлено 3,5 часа (18:00–21:30), а блоки сценария заканчивались в 20:40. Сложила длительность всех блоков.</p>
+                  </div>
+                  <div>
+                    <h4>Исправление и результат</h4>
+                    <p>В итоговый сценарий добавлен блок «Чаепитие, песня и проводы» (20:40–21:30), где звучит песня из Suno.</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="error-card" data-reveal>
+                <div class="error-head">
+                  <span class="error-num" aria-hidden="true">5</span>
+                  <h3>Опечатка в моём запросе к Gemini</h3>
+                  <span class="error-status soft">Не повлияло</span>
+                </div>
+                <div class="error-body">
+                  <div>
+                    <h4>Как обнаружила</h4>
+                    <p>Осталось «день рождения сына» из исходного кейса урока. Перечитала свой запрос.</p>
+                  </div>
+                  <div>
+                    <h4>Исправление и результат</h4>
+                    <p>На результат не повлияло: дальше в запросе указано «Дочке исполнится 12 лет», и Gemini составил все промпты для девочки. Запрос оставлен без изменений как подлинный.</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <details class="prompt-card" style="margin-top: 24px;">
+              <summary>Уточняющий запрос по тексту и играм</summary>
+              <div class="prompt-body">
+                <div class="copy-wrap">
+                  <pre class="prompt-text" id="prompt-fix-text">Я перепроверила вводные данные: у нас 8 гостей + именинница = 9 человек. В твоих предыдущих ответах (в сценарии и в песне) фигурирует цифра 8, пожалуйста, исправь это на 9 во всех текстах. Также я заметила, что игры из "Запроса 3" частично дублируют застольные интерактивы из "Запроса 2". Оставь только 2 уникальные игры для застолья, которые точно не пересекаются с квестом, и адаптируй механику так, чтобы в них комфортно участвовали именно 9 человек. Перепиши текст песни с учетом цифры 9.</pre>
+                  <button class="copy-btn" type="button" data-copy="#prompt-fix-text">Копировать</button>
+                </div>
+              </div>
+            </details>
+
+            <details class="prompt-card">
+              <summary>Уточняющий запрос по картинке</summary>
+              <div class="prompt-body">
+                <div class="copy-wrap">
+                  <pre class="prompt-text" id="prompt-fix-image">Уютная семейная иллюстрация в стиле современной детской книги, пастельные теплые тона. На переднем плане стоит уверенная, стильная девочка-подросток (строго 12 лет, не малыш!), она задувает свечи на красивом праздничном торте. Вокруг стола сидят и стоят 8 членов семьи разного возраста: бабушка, дедушка, мама, папа, дядя, тетя и двое маленьких детей (мальчик и девочка). Атмосфера тепла, смеха и домашнего уюта, мягкий свет гирлянд. Минималистичный фон, без текста, без искажений лиц.</pre>
+                  <button class="copy-btn" type="button" data-copy="#prompt-fix-image">Копировать</button>
+                </div>
+              </div>
+            </details>
+
+            <div class="figure-pair">
+              <figure class="figure">
+                <img src="assets/img/fix-song.png" alt="Скриншот GigaChat с исправленной песней «девять нот семьи»" data-lightbox data-caption="Скриншот 7. GigaChat — исправленная песня «девять нот семьи» и две игры на 9 человек">
+                <figcaption><b>Скриншот 7</b> Исправленная песня и две уникальные игры на 9 человек.</figcaption>
+              </figure>
+              <figure class="figure">
+                <img src="assets/img/step8-card-fix.png" alt="Скриншот GigaChat с уточняющим запросом и новой иллюстрацией" data-lightbox data-caption="Скриншот 8. GigaChat — уточняющий запрос и новая картинка">
+                <figcaption><b>Скриншот 8</b> Уточняющий запрос и новая иллюстрация.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <!-- ЭТАП 4 -->
+        <section class="stage" id="stage-4">
+          <span class="stage-marker" aria-hidden="true">4</span>
+          <p class="stage-kicker">Этап 4 · музыка</p>
+          <h2>Два трека в Suno</h2>
+
+          <div class="stage-body">
+            <p>
+              Текст от GigaChat вставлен в Suno, стили взяты из пометок
+              к каждому блоку. Первый трек — по исходной версии песни,
+              второй — по исправленной, где «восемь нот» стали «девятью».
+            </p>
+
+            <div class="figure-pair">
+              <figure class="figure">
+                <img src="assets/img/suno-track1.png" alt="Скриншот трека «Катя ДР» в Suno" data-lightbox data-caption="Трек 1. «Катя ДР» — исходная версия песни">
+                <figcaption><b>Трек 1</b> «Катя ДР» — исходная версия с ошибкой в числе участников.</figcaption>
+              </figure>
+              <figure class="figure">
+                <img src="assets/img/suno-track2.png" alt="Скриншот трека «Песня для Кати 2.0» в Suno" data-lightbox data-caption="Трек 2. «Песня для Кати 2.0» — исправленная версия">
+                <figcaption><b>Трек 2</b> «Песня для Кати 2.0» — исправленный текст.</figcaption>
+              </figure>
+            </div>
+
+            <div class="callout">
+              <span class="callout-title">Что приложено</span>
+              <p>
+                В отчёте и на сайте — скриншоты обоих треков. Отдельные
+                аудиофайлы в домашнем задании не прикладывались: проверяется
+                сценарий и работа с промптами, а не музыка.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ВЫВОДЫ -->
+        <section id="conclusions" style="border-bottom: 0; padding-bottom: 0;">
+          <h2>Выводы</h2>
+          <p>
+            Главный результат — не сам сценарий, а привычка проверять
+            каждый ответ нейросети по вводным.
+          </p>
+          <ul class="conclusions">
+            <li>Модели переносят ошибки по цепочке: неверное число, которое Gemini вписал в промпт, GigaChat не проверил и повторил во всех ответах.</li>
+            <li>После каждого шага нужна проверка: сверка фактов с вводными (подсчёт участников), поиск повторов между ответами, проверка картинки на соответствие описанию.</li>
+            <li>Точный уточняющий промпт с указанием конкретной ошибки и нужного результата исправляет сразу несколько ответов.</li>
+            <li>Ограничения генерации изображений (точное число людей) стоит фиксировать честно, а не выдавать за решённые.</li>
+          </ul>
+        </section>
+      </article>
+
+      <aside class="toc" aria-label="Содержание отчёта">
+        <h2>Содержание</h2>
+        <ol>
+          <li><a href="#stage-1">Gemini: цепочка промптов</a></li>
+          <li><a href="#stage-2">GigaChat: пять запросов</a></li>
+          <li><a href="#stage-3">Ревизия и правки</a></li>
+          <li><a href="#errors">Ошибки и исправления</a></li>
+          <li><a href="#stage-4">Suno: два трека</a></li>
+          <li><a href="#gallery">Все скриншоты</a></li>
+          <li><a href="#conclusions">Выводы</a></li>
+        </ol>
+        <p class="toc-note">
+          <a href="assets/files/worklog.pdf" download>Скачать отчёт в PDF</a><br>
+          <a href="assets/files/worklog.docx" download>Версия DOCX</a>
+        </p>
+      </aside>
+    </div>
+
+    <!-- ГАЛЕРЕЯ -->
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Приложение</p>
+          <h2>Все скриншоты</h2>
+          <p>Нажмите на любой экран, чтобы открыть его крупно. Порядок — как в отчёте о ходе работы.</p>
+        </div>
+
+        <div class="gallery">
+          <figure class="shot" data-reveal>
+            <img src="assets/img/step1-gemini.png" alt="Gemini: запрос и цепочка промптов" data-lightbox data-caption="Скриншот 1. Запрос и ответ Gemini — цепочка из пяти промптов">
+            <figcaption><b>01</b> Gemini: запрос и цепочка промптов</figcaption>
+          </figure>
+          <figure class="shot" data-reveal>
+            <img src="assets/img/step2-concepts.png" alt="GigaChat: три концепции праздника" data-lightbox data-caption="Скриншот 2. GigaChat — три концепции праздника">
+            <figcaption><b>02</b> GigaChat: три концепции</figcaption>
+          </figure>
+          <figure class="shot" data-reveal>
+            <img src="assets/img/step3-scenario.png" alt="GigaChat: сценарий с таймингом" data-lightbox data-caption="Скриншот 3. GigaChat — сценарий «Бабушкин сундучок»">
+            <figcaption><b>03</b> GigaChat: сценарий</figcaption>
+          </figure>
+          <figure class="shot" data-reveal>
+            <img src="assets/img/step4-games.png" alt="GigaChat: четыре игры" data-lightbox data-caption="Скриншот 4. GigaChat — четыре семейные игры">
+            <figcaption><b>04</b> GigaChat: четыре игры</figcaption>
+          </figure>
+          <figure class="shot" data-reveal>
+            <img src="assets/img/step5-song.png" alt="GigaChat: текст песни для Suno" data-lightbox data-caption="Скриншот 5. GigaChat — текст песни для Suno">
+            <figcaption><b>05</b> GigaChat: текст песни</figcaption>
+          </figure>
+          <figure class="shot" data-reveal>
+            <img src="assets/img/card-v1.png" alt="Первая открытка от Kandinsky" data-lightbox data-caption="Картинка 1. Первая открытка: семь фигур, нет именинницы-подростка">
+            <figcaption><b>06</b> Первая открытка (до правок)</figcaption>
+          </figure>
+          <figure class="shot" data-reveal>
+            <img src="assets/img/step6-card.png" alt="GigaChat: запрос и открытка" data-lightbox data-caption="Скриншот 6. GigaChat — запрос и сгенерированная открытка">
+            <figcaption><b>07</b> GigaChat: запрос и открытка</figcaption>
+          </figure>
+          <figure class="shot" data-reveal>
+            <img src="assets/img/fix-song.png" alt="GigaChat: исправленная песня на девять человек" data-lightbox data-caption="Скриншот 7. GigaChat — исправленная песня «девять нот семьи» и две игры на 9 человек">
+            <figcaption><b>08</b> Исправленная песня</figcaption>
+          </figure>
+          <figure class="shot" data-reveal>
+            <img src="assets/img/step8-card-fix.png" alt="GigaChat: исправленная иллюстрация" data-lightbox data-caption="Скриншот 8. GigaChat — уточняющий запрос и новая картинка">
+            <figcaption><b>09</b> Исправленная иллюстрация</figcaption>
+          </figure>
+          <figure class="shot" data-reveal>
+            <img src="assets/img/suno-track1.png" alt="Suno: трек «Катя ДР»" data-lightbox data-caption="Трек 1. «Катя ДР» — исходная версия песни">
+            <figcaption><b>10</b> Suno: «Катя ДР»</figcaption>
+          </figure>
+          <figure class="shot" data-reveal>
+            <img src="assets/img/suno-track2.png" alt="Suno: трек «Песня для Кати 2.0»" data-lightbox data-caption="Трек 2. «Песня для Кати 2.0» — исправленная версия">
+            <figcaption><b>11</b> Suno: «Песня для Кати 2.0»</figcaption>
+          </figure>
+          <figure class="shot" data-reveal>
+            <img src="assets/img/hero-illustration.png" alt="Итоговая иллюстрация праздника" data-lightbox data-caption="Итоговая иллюстрация: именинница задувает свечи в кругу семьи">
+            <figcaption><b>12</b> Итоговая иллюстрация</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9h18v11H3z"></path>
+                <path d="M3 13h18M12 9v11"></path>
+                <path d="M8 9c0-3 4-4 4 0 0-4 4-3 4 0"></path>
+              </svg>
+            </span>
+            <span>Бабушкин сундучок</span>
+          </a>
+          <p>Отчёт о работе: все запросы, ответы, исправления и экраны по этапам. Полная версия — в приложении DOCX и PDF.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Навигация в подвале">
+          <a href="index.html">Обзор</a>
+          <a href="scenario.html">Сценарий</a>
+          <a href="scenario.html#song">Песня</a>
+          <a href="index.html#materials">Файлы</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>Автор работы — Варвара Толмачёва · <span data-year>2026</span></span>
+        <span>Связка: Gemini → GigaChat → Suno</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр изображения">
+    <button class="lightbox-close" type="button" aria-label="Закрыть">&times;</button>
+    <figure>
+      <img alt="">
+      <figcaption></figcaption>
+    </figure>
+  </div>
+
+  <button class="to-top" type="button" aria-label="Наверх">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 19V5M6 11l6-6 6 6"></path>
+    </svg>
+  </button>
+
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
